@@ -2,126 +2,97 @@ import streamlit as st
 import json
 from gemini_config import client
 
-st.set_page_config(page_title="Opportunity Finder")
+st.set_page_config(page_title="Opportunity Finder", page_icon="💼", layout="wide")
 
 st.title("💼 Opportunity Finder")
 
 role = st.text_input(
     "Target Role",
-    placeholder="Data Analyst"
+    placeholder="e.g., Data Analyst, Virtual Assistant, Technical Writer"
 )
 
 if st.button("Find Opportunities"):
+    # ১. ফাঁকা ইনপুট গার্ড রেল
+    if not role.strip():
+        st.warning("⚠️ Please enter a target role to scan the global labor market.")
+        st.stop()
 
-    with st.spinner("Analyzing opportunities..."):
-
+    with st.spinner("🔍 Analyzing global market opportunities..."):
         prompt = f"""
-        You are an elite global labor market analyst,
-        hiring manager,
-        remote work specialist,
-        freelancing strategist,
-        and workforce researcher.
-
+        You are an elite global labor market analyst, hiring manager, remote work specialist, and workforce researcher.
         Analyze opportunities for:
-
         ROLE: {role}
 
-        Requirements:
-
-        1. Explain current market outlook.
-        2. Suggest entry-level jobs.
-        3. Suggest internship opportunities.
-        4. Suggest remote jobs.
-        5. Suggest freelancing opportunities.
-        6. Suggest AI-resistant opportunities.
-        7. Suggest portfolio requirements.
-        8. Suggest networking strategy.
-        9. Suggest LinkedIn strategy.
-        10. Suggest first-income strategy.
-        11. Estimate salary range.
-        12. Mention future demand.
-
-        Return ONLY JSON.
-
-        {{
-            "market_outlook":"",
-            "entry_roles":[],
-            "internships":[],
-            "remote_jobs":[],
-            "freelancing":[],
-            "ai_resistant_roles":[],
-            "portfolio_requirements":[],
-            "linkedin_strategy":[],
-            "networking_strategy":[],
-            "first_income_plan":[],
-            "salary_range":"",
-            "future_demand":""
-        }}
+        Requirements: Exhaustively analyze current outlook, entry paths, income milestones, and scalability metrics.
         """
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
-
-        text = response.text.strip()
-
-        text = text.replace(
-            "```json", ""
-        ).replace(
-            "```", ""
-        )
-
         try:
-            data = json.loads(text)
+            # ২. OPTIMIZED: Strict JSON Response Mode
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt,
+                config={
+                    "response_mime_type": "application/json",  # এপিআইকে বাধ্য করা হচ্ছে শুধু বিশুদ্ধ JSON দিতে
+                }
+            )
 
-        except Exception:
-            st.error("AI returned invalid JSON.")
-            st.code(text)
+            # সরাসরি লোড, কোনো ট্রিপল ব্যাকটিক ক্লিনিংয়ের ঝামেলা নেই
+            data = json.loads(response.text.strip())
+
+        except Exception as e:
+            st.error("🚨 System Synch Error. Unparsable payload returned. Please try again.")
+            st.code(response.text if 'response' in locals() else str(e))
             st.stop()
 
-        st.subheader("📈 Market Outlook")
-        st.write(data["market_outlook"])
+        # ৩. RENDER INTERFACE (Beautiful Two-Column Grid Architecture)
+        st.success("🎯 Market Architecture Scaled Successfully!")
+        st.markdown("---")
 
-        st.subheader("🚀 Entry-Level Roles")
-        for item in data["entry_roles"]:
-            st.write("•", item)
+        # সেলারি রেঞ্জটাকে একটু হাইলাইটেড কার্ড হিসেবে উপরে দেখানো হলো
+        st.info(f"💰 **Estimated Global Salary Range:** {data.get('salary_range', 'N/A')}")
 
-        st.subheader("🎓 Internships")
-        for item in data["internships"]:
-            st.write("•", item)
+        col1, col2 = st.columns(2)
 
-        st.subheader("🌍 Remote Jobs")
-        for item in data["remote_jobs"]:
-            st.write("•", item)
+        with col1:
+            st.subheader("📈 Market Outlook")
+            st.write(data.get("market_outlook", "N/A"))
 
-        st.subheader("💰 Freelancing Opportunities")
-        for item in data["freelancing"]:
-            st.write("•", item)
+            st.subheader("🚀 Entry-Level Roles")
+            for item in data.get("entry_roles", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("🛡 AI-Resistant Opportunities")
-        for item in data["ai_resistant_roles"]:
-            st.write("•", item)
+            st.subheader("🎓 Internships")
+            for item in data.get("internships", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("🛠 Portfolio Requirements")
-        for item in data["portfolio_requirements"]:
-            st.write("•", item)
+            st.subheader("🌍 Remote Jobs")
+            for item in data.get("remote_jobs", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("💼 LinkedIn Strategy")
-        for item in data["linkedin_strategy"]:
-            st.write("•", item)
+            st.subheader("🛡️ AI-Resistant Opportunities")
+            for item in data.get("ai_resistant_roles", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("🤝 Networking Strategy")
-        for item in data["networking_strategy"]:
-            st.write("•", item)
+        with col2:
+            st.subheader("💰 Freelancing Opportunities")
+            for item in data.get("freelancing", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("💵 First Income Strategy")
-        for item in data["first_income_plan"]:
-            st.write("•", item)
+            st.subheader("🛠️ Portfolio Requirements")
+            for item in data.get("portfolio_requirements", []):
+                st.markdown(f"- {item}")
 
-        st.subheader("📊 Future Demand")
-        st.write(data["future_demand"])
+            st.subheader("💼 LinkedIn Strategy")
+            for item in data.get("linkedin_strategy", []):
+                st.markdown(f"- {item}")
 
-        st.success(
-            f"Estimated Salary Range: {data['salary_range']}"
-        )
+            st.subheader("🤝 Networking Strategy")
+            for item in data.get("networking_strategy", []):
+                st.markdown(f"- {item}")
+
+            st.subheader("💵 First Income Strategy")
+            for item in data.get("first_income_plan", []):
+                st.markdown(f"- {item}")
+
+            st.subheader("📊 Future Demand")
+            st.write(data.get("future_demand", "N/A"))
