@@ -2,103 +2,148 @@ import streamlit as st
 import json
 from gemini_config import client
 
-st.set_page_config(page_title="Learning Hub", page_icon="📚", layout="wide")
+st.set_page_config(page_title="Learning Hub")
 
 st.title("📚 AI Learning Hub")
 
 role = st.text_input(
     "Target Role",
-    placeholder="e.g., Data Analyst, QA Engineer, DevOps Specialist"
+    placeholder="Data Analyst"
 )
 
 if st.button("Generate Learning Plan"):
-    # ১. খালি ইনপুট গার্ড রেল
+
     if not role.strip():
         st.warning("⚠️ Please provide a target market role to initialize the graph.")
         st.stop()
 
-    with st.spinner("🧠 Connecting to Gemini Cloud & Building your Roadmap..."):
+    with st.spinner("Building roadmap..."):
+
         prompt = f"""
-        You are an elite global career strategist and hiring manager.
-        Create a complete employability roadmap for a student who wants to become a:
+        You are an elite global career strategist,
+        learning architect,
+        AI mentor,
+        hiring manager,
+        and workforce analyst.
+
+        Create a complete employability roadmap
+        for a student who wants to become:
+
         ROLE: {role}
 
-        Requirements: Provide exhaustive actionable parameters for all requested nodes.
+        Requirements:
+
+        1. Explain the role.
+        2. Explain market demand.
+        3. List beginner skills.
+        4. List intermediate skills.
+        5. List advanced skills.
+        6. Recommend AI tools.
+        7. Recommend learning sequence.
+        8. Recommend certifications.
+        9. Recommend YouTube resources.
+        10. Recommend portfolio projects.
+        11. Suggest internship strategy.
+        12. Suggest LinkedIn strategy.
+        13. Mention common mistakes.
+        14. Suggest a realistic timeline.
+
+        Return ONLY JSON.
+
+        {{
+            "role_overview":"",
+            "market_demand":"",
+            "beginner_skills":[],
+            "intermediate_skills":[],
+            "advanced_skills":[],
+            "ai_tools":[],
+            "youtube_resources":[],
+            "certifications":[],
+            "projects":[],
+            "linkedin_strategy":[],
+            "internship_strategy":[],
+            "common_mistakes":[],
+            "timeline":[]
+        }}
         """
 
         try:
-            # ২. OPTIMIZED: Strict JSON Response Mode Setup
+
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
-                contents=prompt,
-                config={
-                    "response_mime_type": "application/json", # গুগলের সার্ভারকে বাধ্য করা হচ্ছে শুধু JSON দিতে
-                }
+                contents=prompt
             )
 
-            # সরাসরি খাঁটি JSON লোড করা হচ্ছে, কোনো স্ট্রিং রিপ্লেসের ঝামেলা নেই
-            data = json.loads(response.text.strip())
-
         except Exception as e:
-            st.error("🚨 Cloud Node Synch Error. AI returned an unparsable block. Please retry.")
-            st.code(response.text if 'response' in locals() else str(e))
+
+            st.error(
+                "Gemini service is temporarily unavailable. Please try again."
+            )
+
             st.stop()
 
-        # ৩. RENDER COMPONENT INTERFACE
-        st.success("✨ Roadmap Synthesized Successfully!")
-        st.markdown("---")
+        text = response.text.strip()
 
-        # Layout Column split for beautiful visual architecture
-        col_main1, col_main2 = st.columns([1, 1])
+        text = text.replace(
+            "```json", ""
+        ).replace(
+            "```", ""
+        )
 
-        with col_main1:
-            st.subheader("🌍 Role Overview")
-            st.info(data.get("role_overview", "N/A"))
+        try:
+            data = json.loads(text)
 
-            st.subheader("📈 Market Demand")
-            st.write(data.get("market_demand", "N/A"))
+        except Exception:
+            st.error("AI returned invalid response. Please try again.")
+            st.code(text)
+            st.stop()
 
-            st.subheader("🟢 Beginner Skills")
-            for item in data.get("beginner_skills", []):
-                st.markdown(f"- {item}")
+        st.subheader("🌍 Role Overview")
+        st.write(data["role_overview"])
 
-            st.subheader("🟡 Intermediate Skills")
-            for item in data.get("intermediate_skills", []):
-                st.markdown(f"- {item}")
+        st.subheader("📈 Market Demand")
+        st.write(data["market_demand"])
 
-            st.subheader("🔴 Advanced Skills")
-            for item in data.get("advanced_skills", []):
-                st.markdown(f"- {item}")
+        st.subheader("🟢 Beginner Skills")
+        for item in data["beginner_skills"]:
+            st.write("•", item)
 
-            st.subheader("🤖 AI Tools")
-            for item in data.get("ai_tools", []):
-                st.markdown(f"- {item}")
+        st.subheader("🟡 Intermediate Skills")
+        for item in data["intermediate_skills"]:
+            st.write("•", item)
 
-        with col_main2:
-            st.subheader("🛠️ Portfolio Projects")
-            for item in data.get("projects", []):
-                st.markdown(f"- {item}")
+        st.subheader("🔴 Advanced Skills")
+        for item in data["advanced_skills"]:
+            st.write("•", item)
 
-            st.subheader("📜 Certifications")
-            for item in data.get("certifications", []):
-                st.markdown(f"- {item}")
+        st.subheader("🤖 AI Tools")
+        for item in data["ai_tools"]:
+            st.write("•", item)
 
-            st.subheader("🎥 YouTube Resources")
-            for item in data.get("youtube_resources", []):
-                st.markdown(f"- {item}")
+        st.subheader("🛠 Portfolio Projects")
+        for item in data["projects"]:
+            st.write("•", item)
 
-            st.subheader("💼 LinkedIn Strategy")
-            for item in data.get("linkedin_strategy", []):
-                st.markdown(f"- {item}")
+        st.subheader("📜 Certifications")
+        for item in data["certifications"]:
+            st.write("•", item)
 
-            st.subheader("🚀 Internship Strategy")
-            for item in data.get("internship_strategy", []):
-                st.markdown(f"- {item}")
+        st.subheader("🎥 YouTube Resources")
+        for item in data["youtube_resources"]:
+            st.write("•", item)
 
-            st.subheader("⚠ Common Mistakes")
-            for item in data.get("common_mistakes", []):
-                st.markdown(f"- {item}")
+        st.subheader("💼 LinkedIn Strategy")
+        for item in data["linkedin_strategy"]:
+            st.write("•", item)
 
-            st.subheader("📅 Learning Timeline")
-            for item in data.get("timeline", []):
-                st.markdown(f"- {item}")
+        st.subheader("🚀 Internship Strategy")
+        for item in data["internship_strategy"]:
+            st.write("•", item)
+
+        st.subheader("⚠ Common Mistakes")
+        for item in data["common_mistakes"]:
+            st.write("•", item)
+
+        st.subheader("📅 Learning Timeline")
+        for item in data["timeline"]:
+            st.write("•", item)
