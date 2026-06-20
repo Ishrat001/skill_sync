@@ -4,6 +4,30 @@ from gemini_config import client
 
 st.set_page_config(page_title="Interview Coach")
 
+with st.sidebar:
+    st.title("🎯 SkillSync AI")
+    st.caption("AI-Powered Career Intelligence Platform")
+
+    st.markdown("---")
+
+    app_mode = st.radio(
+        "Workspace",
+        [
+            "🔮 AI Interview Coach",
+        ]
+    )
+
+    st.markdown("---")
+
+    st.markdown("""
+    ### 🚀 Venture Profile
+
+    - **Startup:** SkillSync AI  
+    - **Founders:** Ishrat & Nafisa  
+    - **Department:** CSE, University of Dhaka  
+    - **Mission:** Bridging academic knowledge with global employability
+    """)
+
 st.title("🎤 AI Interview Coach")
 
 role = st.text_input(

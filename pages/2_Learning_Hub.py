@@ -4,6 +4,30 @@ from gemini_config import client
 
 st.set_page_config(page_title="Learning Hub")
 
+with st.sidebar:
+    st.title("🎯 SkillSync AI")
+    st.caption("AI-Powered Career Intelligence Platform")
+
+    st.markdown("---")
+
+    app_mode = st.radio(
+        "Workspace",
+        [
+            "🔮 AI Learning Hub",
+        ]
+    )
+
+    st.markdown("---")
+
+    st.markdown("""
+    ### 🚀 Venture Profile
+
+    - **Startup:** SkillSync AI  
+    - **Founders:** Ishrat & Nafisa  
+    - **Department:** CSE, University of Dhaka  
+    - **Mission:** Bridging academic knowledge with global employability
+    """)
+
 st.title("📚 AI Learning Hub")
 
 role = st.text_input(

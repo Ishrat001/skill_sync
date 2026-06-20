@@ -123,8 +123,6 @@ with st.sidebar:
         "Workspace",
         [
             "🔮 AI Career Navigator",
-            "🤖 Interview Simulator",
-            "📜 ISA Portal"
         ]
     )
 
@@ -415,59 +413,3 @@ if app_mode == "🔮 AI Career Navigator":
                 except Exception as e:
 
                     st.error(f"Error: {str(e)}")
-
-# =========================================
-# INTERVIEW SECTION
-# =========================================
-
-elif app_mode == "🤖 Interview Simulator":
-
-    st.markdown("""
-    <div class='hero-card'>
-        <h1>🤖 AI Interview Simulator</h1>
-        <p style='color:#cbd5e1;'>
-        Simulate modern remote-job interviews and improve confidence.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.text_input(
-        "Interview Question",
-        value="Tell me about yourself and your strongest skill.",
-        disabled=True
-    )
-
-    st.text_area(
-        "Your Answer",
-        placeholder="Write your answer here..."
-    )
-
-# =========================================
-# ISA SECTION
-# =========================================
-
-elif app_mode == "📜 ISA Portal":
-
-    st.markdown("""
-    <div class='hero-card'>
-        <h1>📜 ISA Portal</h1>
-        <p style='color:#cbd5e1;'>
-        Transparent and ethical income-sharing framework.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class='glass-card'>
-
-    ### 🔒 Financial Terms
-
-    - Upfront Cost: $0  
-    - Activation Threshold: $400/month income  
-    - Flexible repayment structure  
-    - Ethical & student-friendly system
-
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.checkbox("I agree to the program terms.")
