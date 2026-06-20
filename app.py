@@ -6,6 +6,30 @@ st.set_page_config(
     layout="wide"
 )
 
+with st.sidebar:
+    st.title("🎯 SkillSync AI")
+    st.caption("AI-Powered Career Intelligence Platform")
+
+    st.markdown("---")
+
+    app_mode = st.radio(
+        "Workspace",
+        [
+            "🔮 HomePage",
+        ]
+    )
+
+    st.markdown("---")
+
+    st.markdown("""
+    ### 🚀 Venture Profile
+
+    - **Startup:** SkillSync AI  
+    - **Founders:** Ishrat & Nafisa  
+    - **Department:** CSE, University of Dhaka  
+    - **Mission:** Bridging academic knowledge with global employability
+    """)
+
 st.title("🎯 SkillSync AI")
 
 st.markdown("""
