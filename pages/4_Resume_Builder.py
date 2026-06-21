@@ -113,3 +113,36 @@ if st.button("Generate Resume"):
 
         st.subheader("🎓 Education")
         st.write(data["education"])
+
+        # =========================
+        # DOWNLOAD RESUME
+        # =========================
+
+        resume_text = f"""
+        PROFESSIONAL SUMMARY
+
+        {data["professional_summary"]}
+
+        CAREER OBJECTIVE
+
+        {data["career_objective"]}
+
+        SKILLS
+
+        {chr(10).join(data["skills"])}
+
+        PROJECTS
+
+        {chr(10).join(data["projects"])}
+
+        EDUCATION
+
+        {data["education"]}
+        """
+
+        st.download_button(
+            label="📥 Download Resume",
+            data=resume_text,
+            file_name="resume.txt",
+            mime="text/plain"
+        )
