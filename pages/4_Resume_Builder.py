@@ -10,17 +10,17 @@ with st.sidebar:
 
     st.markdown("---")
 
-    app_mode = st.radio(
+    st.radio(
         "Workspace",
         [
-            " AI Resume Builder",
+            "AI Resume Builder",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ###  Venture Profile
+    ### 🚀 Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -28,7 +28,7 @@ with st.sidebar:
     - **Mission:** Bridging academic knowledge with global employability
     """)
 
-st.title(" AI Resume Builder")
+st.title("📄 AI Resume Builder")
 
 name = st.text_input("Full Name")
 
@@ -59,7 +59,8 @@ if st.button("Generate Resume"):
         Skills: {skills}
         Projects: {projects}
 
-        Return ONLY JSON.
+        IMPORTANT:
+        Return ONLY valid JSON.
 
         {{
             "professional_summary":"",
@@ -80,9 +81,9 @@ if st.button("Generate Resume"):
             text = response.text.strip()
 
             text = text.replace(
-                "```json",""
+                "```json", ""
             ).replace(
-                "```",""
+                "```", ""
             )
 
             data = json.loads(text)
@@ -95,47 +96,51 @@ if st.button("Generate Resume"):
 
             st.stop()
 
-        st.subheader(" Professional Summary")
-        st.write(data["professional_summary"])
+        st.subheader("🧾 Professional Summary")
+        st.write(
+            data.get(
+                "professional_summary",
+                "Not available"
+            )
+        )
 
-        st.subheader(" Career Objective")
-        st.write(data["career_objective"])
+        st.subheader("🎯 Career Objective")
+        st.write(
+            data.get(
+                "career_objective",
+                "Not available"
+            )
+        )
 
-        st.subheader(" Skills")
+        st.subheader("🛠 Skills")
 
-        for item in data["skills"]:
-            st.write("•", item)
+        skills_data = data.get("skills", [])
 
-        st.subheader(" Projects")
+        if isinstance(skills_data, list):
 
-        for item in data["projects"]:
-            st.write("•", item)
+            for item in skills_data:
+                st.write(f"• {item}")
 
-        st.subheader(" Education")
-        st.write(data["education"])
+        else:
+            st.write(skills_data)
 
-        # =========================
-        # DOWNLOAD RESUME
-        # =========================
+        st.subheader("🚀 Projects")
 
-        resume_text = f"""
-        PROFESSIONAL SUMMARY
+        projects_data = data.get("projects", [])
 
-        {data["professional_summary"]}
+        if isinstance(projects_data, list):
 
-        CAREER OBJECTIVE
+            for item in projects_data:
+                st.write(f"• {item}")
 
-        {data["career_objective"]}
+        else:
+            st.write(projects_data)
 
-        SKILLS
+        st.subheader("🎓 Education")
 
-        {chr(10).join(data["skills"])}
-
-        PROJECTS
-
-        {chr(10).join(data["projects"])}
-
-        EDUCATION
-
-        {data["education"]}
-        """
+        st.write(
+            data.get(
+                "education",
+                degree
+            )
+        )
