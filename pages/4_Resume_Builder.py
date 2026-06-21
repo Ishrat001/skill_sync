@@ -135,11 +135,7 @@ if st.button("Generate Resume"):
 
         {chr(10).join(data["projects"])}
 
-        """
+        EDUCATION
 
-        st.download_button(
-            label=" Download Resume",
-            data=resume_text,
-            file_name="resume.txt",
-            mime="text/plain"
-        )
+        {data["education"]}
+        """
