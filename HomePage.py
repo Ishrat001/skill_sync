@@ -15,14 +15,14 @@ with st.sidebar:
     app_mode = st.radio(
         "Workspace",
         [
-            "🔮 HomePage",
+            " HomePage",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -48,7 +48,7 @@ col1, col2 = st.columns(2)
 
 with col1:
 
-    st.subheader("🚀 What We Offer")
+    st.subheader(" What We Offer")
 
     st.markdown("""
     - AI Career Analysis
@@ -60,7 +60,7 @@ with col1:
 
 with col2:
 
-    st.subheader("🎯 Impact")
+    st.subheader(" Impact")
 
     st.markdown("""
     - Reduce Skill Gap
@@ -72,22 +72,22 @@ with col2:
 
 st.markdown("---")
 
-st.subheader("🧩 Product Modules")
+st.subheader(" Product Modules")
 
 st.markdown("""
-### 🔮 Career Navigator
+###  Career Navigator
 Analyze strengths, weaknesses, employability and market fit.
 
-### 📚 Learning Hub
+###  Learning Hub
 Generate personalized learning plans and skill roadmaps.
 
-### 💼 Opportunity Finder
+###  Opportunity Finder
 Discover internships, freelancing and remote opportunities.
 
-### 📄 Resume Builder
+###  Resume Builder
 Create ATS-friendly professional resumes.
 
-### 🎤 Interview Coach
+###  Interview Coach
 Practice interviews and receive AI-powered feedback.
 """)
 

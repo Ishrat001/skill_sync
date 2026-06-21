@@ -28,7 +28,7 @@ with st.sidebar:
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -40,7 +40,7 @@ with st.sidebar:
 # MAIN UI
 # =========================
 
-st.title("🎤 AI Interview Coach")
+st.title(" AI Interview Coach")
 
 role = st.text_input(
     "Target Role",
@@ -52,7 +52,7 @@ role = st.text_input(
 # START INTERVIEW
 # =========================
 
-if st.button("🚀 Start Interview"):
+if st.button(" Start Interview"):
 
     st.session_state.role = role
 
@@ -117,7 +117,7 @@ if st.session_state.question:
     # EVALUATE ANSWER
     # =========================
 
-    if st.button("✅ Evaluate Answer"):
+    if st.button(" Evaluate Answer"):
 
         try:
 
@@ -201,7 +201,7 @@ if st.session_state.question:
                 data["communication_score"] / 100
             )
 
-        st.subheader("📝 Feedback")
+        st.subheader(" Feedback")
 
         for item in data["feedback"]:
             st.write(f"• {item}")

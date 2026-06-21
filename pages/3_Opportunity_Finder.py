@@ -13,14 +13,14 @@ with st.sidebar:
     app_mode = st.radio(
         "Workspace",
         [
-            "🔮 AI Opportunity Finder",
+            " AI Opportunity Finder",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -28,7 +28,7 @@ with st.sidebar:
     - **Mission:** Bridging academic knowledge with global employability
     """)
 
-st.title("💼 Opportunity Finder")
+st.title(" Opportunity Finder")
 
 role = st.text_input(
     "Target Role",
@@ -113,46 +113,46 @@ if st.button("Find Opportunities"):
             st.code(text)
             st.stop()
 
-        st.subheader("📈 Market Outlook")
+        st.subheader(" Market Outlook")
         st.write(data["market_outlook"])
 
-        st.subheader("🚀 Entry-Level Roles")
+        st.subheader(" Entry-Level Roles")
         for item in data["entry_roles"]:
             st.write("•", item)
 
-        st.subheader("🎓 Internships")
+        st.subheader(" Internships")
         for item in data["internships"]:
             st.write("•", item)
 
-        st.subheader("🌍 Remote Jobs")
+        st.subheader(" Remote Jobs")
         for item in data["remote_jobs"]:
             st.write("•", item)
 
-        st.subheader("💰 Freelancing Opportunities")
+        st.subheader(" Freelancing Opportunities")
         for item in data["freelancing"]:
             st.write("•", item)
 
-        st.subheader("🛡 AI-Resistant Opportunities")
+        st.subheader(" AI-Resistant Opportunities")
         for item in data["ai_resistant_roles"]:
             st.write("•", item)
 
-        st.subheader("🛠 Portfolio Requirements")
+        st.subheader(" Portfolio Requirements")
         for item in data["portfolio_requirements"]:
             st.write("•", item)
 
-        st.subheader("💼 LinkedIn Strategy")
+        st.subheader(" LinkedIn Strategy")
         for item in data["linkedin_strategy"]:
             st.write("•", item)
 
-        st.subheader("🤝 Networking Strategy")
+        st.subheader(" Networking Strategy")
         for item in data["networking_strategy"]:
             st.write("•", item)
 
-        st.subheader("💵 First Income Strategy")
+        st.subheader(" First Income Strategy")
         for item in data["first_income_plan"]:
             st.write("•", item)
 
-        st.subheader("📊 Future Demand")
+        st.subheader(" Future Demand")
         st.write(data["future_demand"])
 
         st.success(

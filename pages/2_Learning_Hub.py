@@ -13,14 +13,14 @@ with st.sidebar:
     app_mode = st.radio(
         "Workspace",
         [
-            "🔮 AI Learning Hub",
+            " AI Learning Hub",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -28,7 +28,7 @@ with st.sidebar:
     - **Mission:** Bridging academic knowledge with global employability
     """)
 
-st.title("📚 AI Learning Hub")
+st.title(" AI Learning Hub")
 
 role = st.text_input(
     "Target Role",
@@ -38,7 +38,7 @@ role = st.text_input(
 if st.button("Generate Learning Plan"):
 
     if not role.strip():
-        st.warning("⚠️ Please provide a target market role to initialize the graph.")
+        st.warning(" Please provide a target market role to initialize the graph.")
         st.stop()
 
     with st.spinner("Building roadmap..."):
@@ -122,52 +122,52 @@ if st.button("Generate Learning Plan"):
             st.code(text)
             st.stop()
 
-        st.subheader("🌍 Role Overview")
+        st.subheader(" Role Overview")
         st.write(data["role_overview"])
 
-        st.subheader("📈 Market Demand")
+        st.subheader(" Market Demand")
         st.write(data["market_demand"])
 
-        st.subheader("🟢 Beginner Skills")
+        st.subheader(" Beginner Skills")
         for item in data["beginner_skills"]:
             st.write("•", item)
 
-        st.subheader("🟡 Intermediate Skills")
+        st.subheader(" Intermediate Skills")
         for item in data["intermediate_skills"]:
             st.write("•", item)
 
-        st.subheader("🔴 Advanced Skills")
+        st.subheader(" Advanced Skills")
         for item in data["advanced_skills"]:
             st.write("•", item)
 
-        st.subheader("🤖 AI Tools")
+        st.subheader(" AI Tools")
         for item in data["ai_tools"]:
             st.write("•", item)
 
-        st.subheader("🛠 Portfolio Projects")
+        st.subheader(" Portfolio Projects")
         for item in data["projects"]:
             st.write("•", item)
 
-        st.subheader("📜 Certifications")
+        st.subheader(" Certifications")
         for item in data["certifications"]:
             st.write("•", item)
 
-        st.subheader("🎥 YouTube Resources")
+        st.subheader(" YouTube Resources")
         for item in data["youtube_resources"]:
             st.write("•", item)
 
-        st.subheader("💼 LinkedIn Strategy")
+        st.subheader(" LinkedIn Strategy")
         for item in data["linkedin_strategy"]:
             st.write("•", item)
 
-        st.subheader("🚀 Internship Strategy")
+        st.subheader(" Internship Strategy")
         for item in data["internship_strategy"]:
             st.write("•", item)
 
-        st.subheader("⚠ Common Mistakes")
+        st.subheader(" Common Mistakes")
         for item in data["common_mistakes"]:
             st.write("•", item)
 
-        st.subheader("📅 Learning Timeline")
+        st.subheader(" Learning Timeline")
         for item in data["timeline"]:
             st.write("•", item)

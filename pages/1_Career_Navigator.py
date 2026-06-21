@@ -122,14 +122,14 @@ with st.sidebar:
     app_mode = st.radio(
         "Workspace",
         [
-            "🔮 AI Career Navigator",
+            " AI Career Navigator",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -141,11 +141,11 @@ with st.sidebar:
 # MAIN APP
 # =========================================
 
-if app_mode == "🔮 AI Career Navigator":
+if app_mode == " AI Career Navigator":
 
     st.markdown("""
     <div class='hero-card'>
-        <h1>🎯 AI Career Navigator</h1>
+        <h1> AI Career Navigator</h1>
         <p style='font-size:18px;color:#cbd5e1;'>
         Analyze your academic background, discover future-proof career paths,
         identify missing market skills, and generate a personalized roadmap
@@ -180,7 +180,7 @@ if app_mode == "🔮 AI Career Navigator":
             placeholder="e.g. Python, Canva, Writing, Research, Public Speaking"
         )
 
-    if st.button("🚀 Generate AI Career Analysis"):
+    if st.button(" Generate AI Career Analysis"):
 
         if not degree or not target_role or not skills_raw:
 
@@ -326,14 +326,14 @@ if app_mode == "🔮 AI Career Navigator":
                     # RESULT SECTION
                     # =========================================
 
-                    st.markdown(f"## 📊 Career Intelligence Report for {name}")
+                    st.markdown(f"##  Career Intelligence Report for {name}")
 
                     c1, c2, c3 = st.columns(3)
 
                     with c1:
                         st.markdown(f"""
                         <div class='glass-card'>
-                            <div class='metric-label'>🎯 Career Match</div>
+                            <div class='metric-label'> Career Match</div>
                             <div class='metric-value'>{data['match_score']}%</div>
                         </div>
                         """, unsafe_allow_html=True)
@@ -341,7 +341,7 @@ if app_mode == "🔮 AI Career Navigator":
                     with c2:
                         st.markdown(f"""
                         <div class='glass-card'>
-                            <div class='metric-label'>🚨 Skill Gap</div>
+                            <div class='metric-label'> Skill Gap</div>
                             <div class='metric-value red'>{data['gap_score']}%</div>
                         </div>
                         """, unsafe_allow_html=True)
@@ -349,7 +349,7 @@ if app_mode == "🔮 AI Career Navigator":
                     with c3:
                         st.markdown(f"""
                         <div class='glass-card'>
-                            <div class='metric-label'>💼 Recommended Role</div>
+                            <div class='metric-label'> Recommended Role</div>
                             <div class='metric-value' style='font-size:22px;'>
                                 {data['career_paths'][0]}
                             </div>
@@ -358,54 +358,54 @@ if app_mode == "🔮 AI Career Navigator":
 
                     st.progress(data['match_score'] / 100)
 
-                    st.markdown("## 💡 Market Insights")
+                    st.markdown("##  Market Insights")
 
                     for item in data["market_insights"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## 🧠 Recommended Career Paths")
+                    st.markdown("##  Recommended Career Paths")
 
                     for item in data["career_paths"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## ✅ Existing Strengths")
+                    st.markdown("##  Existing Strengths")
 
                     for item in data["matched_assets"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## ❌ Missing Industry Skills")
+                    st.markdown("##  Missing Industry Skills")
 
                     for item in data["missing_parameters"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## 🚀 Recommended Skills To Learn")
+                    st.markdown("##  Recommended Skills To Learn")
 
                     for item in data["recommended_skills"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## 🛠️ Project Ideas")
+                    st.markdown("##  Project Ideas")
 
                     for item in data["project_ideas"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## 🌍 Remote Opportunities")
+                    st.markdown("##  Remote Opportunities")
 
                     for item in data["remote_opportunities"]:
                         st.write(f"• {item}")
 
-                    st.markdown("## 🎥 YouTube Learning Resources")
+                    st.markdown("##  YouTube Learning Resources")
 
                     for course in data["youtube_courses"]:
                         st.markdown(
                             f"- [{course['title']}]({course['link']})"
                         )
 
-                    st.markdown("## 🗺️ Personalized Growth Roadmap")
+                    st.markdown("##  Personalized Growth Roadmap")
 
                     for idx, sprint in enumerate(data["sprints"]):
 
                         with st.expander(
-                            f"🚀 Phase {idx+1}: {sprint['title']}",
+                            f" Phase {idx+1}: {sprint['title']}",
                             expanded=True
                         ):
                             st.write(sprint['focus'])

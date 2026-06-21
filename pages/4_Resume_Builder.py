@@ -13,14 +13,14 @@ with st.sidebar:
     app_mode = st.radio(
         "Workspace",
         [
-            "🔮 AI Resume Builder",
+            " AI Resume Builder",
         ]
     )
 
     st.markdown("---")
 
     st.markdown("""
-    ### 🚀 Venture Profile
+    ###  Venture Profile
 
     - **Startup:** SkillSync AI  
     - **Founders:** Ishrat & Nafisa  
@@ -28,7 +28,7 @@ with st.sidebar:
     - **Mission:** Bridging academic knowledge with global employability
     """)
 
-st.title("📄 AI Resume Builder")
+st.title(" AI Resume Builder")
 
 name = st.text_input("Full Name")
 
@@ -95,23 +95,23 @@ if st.button("Generate Resume"):
 
             st.stop()
 
-        st.subheader("👤 Professional Summary")
+        st.subheader(" Professional Summary")
         st.write(data["professional_summary"])
 
-        st.subheader("🎯 Career Objective")
+        st.subheader(" Career Objective")
         st.write(data["career_objective"])
 
-        st.subheader("🧠 Skills")
+        st.subheader(" Skills")
 
         for item in data["skills"]:
             st.write("•", item)
 
-        st.subheader("🛠 Projects")
+        st.subheader(" Projects")
 
         for item in data["projects"]:
             st.write("•", item)
 
-        st.subheader("🎓 Education")
+        st.subheader(" Education")
         st.write(data["education"])
 
         # =========================
@@ -141,7 +141,7 @@ if st.button("Generate Resume"):
         """
 
         st.download_button(
-            label="📥 Download Resume",
+            label=" Download Resume",
             data=resume_text,
             file_name="resume.txt",
             mime="text/plain"
